@@ -1,0 +1,175 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "IRANSansX";
+  src: url("/fonts/IRANSansX-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "IRANSansX";
+  src: url("/fonts/IRANSansX-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "IRANSansX";
+  src: url("/fonts/IRANSansX-ExtraBold.ttf") format("truetype");
+  font-weight: 800;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "IRANSansX";
+  src: url("/fonts/IRANSansX-Black.ttf") format("truetype");
+  font-weight: 900;
+  font-display: swap;
+}
+
+:root {
+  color-scheme: dark;
+  font-family: "IRANSansX", system-ui, sans-serif;
+  background: #050816;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  overflow-x: hidden;
+  background: #050816;
+  color: #ffffff;
+  font-family: "IRANSansX", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.stadium-bg {
+  background:
+    linear-gradient(115deg, transparent 0 19%, rgba(0, 255, 133, 0.13) 20%, transparent 36%),
+    linear-gradient(245deg, transparent 0 17%, rgba(0, 217, 255, 0.14) 18%, transparent 35%),
+    linear-gradient(180deg, rgba(139, 92, 246, 0.16) 0%, transparent 42%),
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.045) 0 1px, transparent 1px 92px),
+    radial-gradient(ellipse at 50% 100%, rgba(0, 255, 133, 0.18) 0%, transparent 58%),
+    linear-gradient(180deg, #050816 0%, #0b1023 52%, #050816 100%);
+  animation: stadium-shift 16s ease-in-out infinite;
+}
+
+.glass {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.055);
+  backdrop-filter: blur(18px);
+}
+
+.live-dot {
+  width: 0.65rem;
+  height: 0.65rem;
+  border-radius: 999px;
+  background: #00ff85;
+  box-shadow: 0 0 0 0 rgba(0, 255, 133, 0.72);
+  animation: live-pulse 1.55s ease-out infinite;
+}
+
+.dashboard-preview {
+  max-height: 260px;
+  overflow: hidden;
+}
+
+.faq-answer {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition:
+    grid-template-rows 0.26s ease,
+    opacity 0.26s ease;
+}
+
+.faq-answer > div {
+  overflow: hidden;
+}
+
+[data-faq-item].is-open .faq-answer {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+[data-faq-item].is-open .faq-icon {
+  transform: rotate(45deg);
+}
+
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(34px);
+  transition:
+    opacity 0.72s ease,
+    transform 0.72s ease;
+}
+
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.float-slow {
+  animation: float-slow 7.5s ease-in-out infinite;
+}
+
+@keyframes stadium-shift {
+  0%,
+  100% {
+    filter: saturate(1);
+    transform: translate3d(0, 0, 0);
+  }
+
+  50% {
+    filter: saturate(1.22);
+    transform: translate3d(0, -0.35rem, 0);
+  }
+}
+
+@keyframes live-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(0, 255, 133, 0.72);
+  }
+
+  70% {
+    box-shadow: 0 0 0 0.55rem rgba(0, 255, 133, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(0, 255, 133, 0);
+  }
+}
+
+@keyframes float-slow {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-14px) rotate(7deg);
+  }
+}
+
+@media (max-width: 640px) {
+  .dashboard-preview {
+    max-height: 250px;
+    max-width: 22rem;
+  }
+}
